@@ -14,6 +14,7 @@
 from __future__ import absolute_import, division, print_function
 
 import collections
+import operator
 import os
 import sys
 import traceback
@@ -261,8 +262,6 @@ def print_sweeps(out=sys.stdout):
     sweeplists.sort()
 
     # sort sweeplist based on epoch of first image of each sweep
-    import operator
-
     epochs = [
         known_sweeps[sweep][0].get_imageset().get_scan().get_epochs()[0]
         for sweep in sweeplists
@@ -611,27 +610,22 @@ def write_xinfo(filename, directories, template=None, hdf5_master_files=None):
 
     # FIXME should I have some exception handling in here...?
 
-    start = os.getcwd()
-    os.chdir(directory)
-
     # if we have given a template and directory on the command line, just
     # look there (i.e. not in the subdirectories)
 
     if CommandLine.get_template() and CommandLine.get_directory():
         templates = set()
-        for directory in CommandLine.get_directory():
-            templates.update(visit(None, directory, os.listdir(directory)))
+        for cldir in CommandLine.get_directory():
+            cldir = os.path.normpath(os.path.join(directory, cldir))
+            templates.update(visit(None, cldir, os.listdir(cldir)))
         get_sweeps(templates)
     elif hdf5_master_files is not None:
         get_sweeps(hdf5_master_files)
     else:
         rummage(directories)
 
-    with open(filename, "w") as fout:
+    with open(os.path.join(directory, filename), "w") as fout:
         print_sweeps(fout)
-
-    # change back directory c/f bug # 2693 - important for error files...
-    os.chdir(start)
 
 
 def run():

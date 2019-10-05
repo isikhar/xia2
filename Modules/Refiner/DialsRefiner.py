@@ -108,7 +108,7 @@ class DialsRefiner(Refiner):
                 reflections = reflections.select(sel)
                 # set indexed reflections to id == 0 and imageset_id == 0
                 reflections["id"].set_selected(reflections["id"] == i, 0)
-                reflections["imageset_id"] = flex.int(len(reflections), 0)
+                reflections["imageset_id"] = flex.int(len(reflections.rows()), 0)
                 reflections.as_pickle(indexed_reflections)
 
             assert (

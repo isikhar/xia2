@@ -317,14 +317,14 @@ class MultiCrystalScale(object):
                 reflections.flags.integrated_prf
             )
             keep_expts = []
-            for i, expt in enumerate(self._data_manager.experiments):
+            for expt in self._data_manager.experiments:
                 if (
                     reflections.select(profile_fitted_mask)
                     .select_on_experiment_identifiers([expt.identifier])
                     .size()
                 ):
                     keep_expts.append(expt.identifier)
-            if len(keep_expts):
+            if keep_expts:
                 logger.info(
                     "Selecting %i experiments with profile-fitted reflections"
                     % len(keep_expts)
@@ -336,7 +336,7 @@ class MultiCrystalScale(object):
             reflections.flags.used_in_refinement
         )
         keep_expts = []
-        for i, expt in enumerate(self._data_manager.experiments):
+        for expt in self._data_manager.experiments:
             if (
                 reflections.select(used_in_refinement_mask)
                 .select_on_experiment_identifiers([expt.identifier])
@@ -348,7 +348,7 @@ class MultiCrystalScale(object):
                     "Removing experiment %s (no refined reflections remaining)"
                     % expt.identifier
                 )
-        if len(keep_expts):
+        if keep_expts:
             logger.info(
                 "Selecting %i experiments with refined reflections" % len(keep_expts)
             )

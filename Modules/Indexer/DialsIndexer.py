@@ -344,7 +344,7 @@ class DialsIndexer(Indexer):
             from dials.util.ascii_art import spot_counts_per_image_plot
 
             refl = flex.reflection_table.from_file(spot_filename)
-            if not len(refl):
+            if not len(refl.rows()):
                 raise RuntimeError("No spots found in sweep %s" % xsweep.get_name())
             Chatter.write(spot_counts_per_image_plot(refl), strip=False)
 
@@ -432,7 +432,7 @@ class DialsIndexer(Indexer):
                 # set scan_range to correspond to not more than 180 degrees
                 # if we have > 20000 reflections
                 width = imageset.get_scan().get_oscillation()[1]
-                if (last - first) * width > 180.0 and len(refl) > 20000:
+                if (last - first) * width > 180.0 and len(refl.rows()) > 20000:
                     end = first + int(round(180.0 / width)) - 1
                     Debug.write("Using %d to %d for beam search" % (first, end))
                     discovery.set_image_range((first, end))

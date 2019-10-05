@@ -83,9 +83,7 @@ def run():
         logger.info("No reflection data found in the input")
         parser.print_help()
         return
-    try:
-        assert len(params.input.reflections) == len(params.input.experiments)
-    except AssertionError:
+    if len(params.input.reflections) != len(params.input.experiments):
         raise Sorry(
             "The number of input reflections files does not match the "
             "number of input experiments"

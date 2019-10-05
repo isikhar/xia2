@@ -21,6 +21,7 @@ import copy
 import math
 import os
 import shutil
+import time
 
 from xia2.Experts.SymmetryExpert import (
     lattice_to_spacegroup_number,
@@ -561,8 +562,6 @@ class XDSIntegrater(Integrater):
                     integrate_hkl, experiments_json, self.get_working_directory()
                 )
                 reflections = flex.reflection_table.from_file(integrate_filename)
-
-                import time
 
                 t0 = time.time()
                 sel = filter_shadowed_reflections(experiments, reflections)

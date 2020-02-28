@@ -1,16 +1,8 @@
-# DriverFactory.py
-#
-#   Copyright (C) 2006 CCLRC, Graeme Winter
-#
-#   This code is distributed under the BSD license, a copy of which is
-#   included in the root directory of this package.
-
 from __future__ import absolute_import, division, print_function
 
 import os
 
 from xia2.Driver.ClusterDriverFactory import ClusterDriverFactory
-from xia2.Driver.InteractiveDriver import InteractiveDriver
 from xia2.Driver.QSubDriver import QSubDriver
 from xia2.Driver.ScriptDriver import ScriptDriver
 from xia2.Driver.SimpleDriver import SimpleDriver
@@ -23,7 +15,6 @@ class _DriverFactory(object):
         self._implemented_types = [
             "simple",
             "script",
-            "interactive",
             "qsub",
             "cluster.sge",
         ]
@@ -57,7 +48,6 @@ class _DriverFactory(object):
         driver_class = {
             "simple": SimpleDriver,
             "script": ScriptDriver,
-            "interactive": InteractiveDriver,
             "qsub": QSubDriver,
         }.get(driver_type)
         if driver_class:

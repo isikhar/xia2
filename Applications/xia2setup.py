@@ -504,7 +504,6 @@ def _write_sweeps(sweeps, out):
                 # really don't need to store the epoch in the xinfo file
                 # out.write('EPOCH %d\n' % int(s.get_collect()[0]))
                 if not settings.trust_beam_centre:
-                    PhilIndex.params.xia2.settings.interactive = False
                     PhilIndex.get_python_object()
 
                 if settings.detector_distance is not None:

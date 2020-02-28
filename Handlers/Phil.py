@@ -595,10 +595,6 @@ xia2.settings
     .short_caption = 'Settings for working with multiple crystals'
     .help = 'Settings for working with multiple crystals'
     .expert_level = 1
-  interactive = False
-    .type = bool
-    .short_caption = 'Interactive indexing'
-    .expert_level = 1
   project = 'AUTOMATIC'
     .type = str
     .help = "A name for the data processing project"

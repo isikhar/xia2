@@ -33,5 +33,4 @@ The following types are currently implemented:
 
 "simple" - interactive operation via pipes (Windows/OS X/Linux)
 "script" - run via scripts - records input & output (Windows/OS X/Linux)
-"interactive" - simple but with more interactive job control (Linux)
 "qsub" - for sun grid engine queuing systems (Linux)

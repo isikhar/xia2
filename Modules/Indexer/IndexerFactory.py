@@ -13,7 +13,6 @@ from xia2.Handlers.PipelineSelection import get_preferences
 from xia2.Modules.Indexer.DialsIndexer import DialsIndexer
 from xia2.Modules.Indexer.XDSIndexer import XDSIndexer
 from xia2.Modules.Indexer.XDSIndexerII import XDSIndexerII
-from xia2.Modules.Indexer.XDSIndexerInteractive import XDSIndexerInteractive
 
 logger = logging.getLogger("xia2.Modules.Indexer.IndexerFactory")
 
@@ -138,10 +137,7 @@ def Indexer(preselection=None):
         (XDSIndexer, "xds", "XDS Indexer"),
     ]
 
-    if PhilIndex.params.xia2.settings.interactive:
-        indexerlist.append((XDSIndexerInteractive, "xdsii", "XDS Interactive Indexer"))
-    else:
-        indexerlist.append((XDSIndexerII, "xdsii", "XDS II Indexer"))
+    indexerlist.append((XDSIndexerII, "xdsii", "XDS II Indexer"))
 
     for (idxfactory, idxname, idxdisplayname) in indexerlist:
         if not indexer and (not preselection or preselection == idxname):
